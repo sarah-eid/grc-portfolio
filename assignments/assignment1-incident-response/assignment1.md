@@ -15,184 +15,200 @@ Submission: One week from date of issue
 
 **Instructions**
 
-- Answer all six questions. Partial credit may be awarded for incomplete but relevant answers.  
-- Support your answers with reference to established frameworks where applicable (e.g., NIST SP 800-61, ISO 27035).  
-- Where the question asks you to recommend or propose, justify your answer — do not simply list actions.  
-- Marks are allocated as shown. Manage your effort accordingly.  
-- Plagiarism between submissions will result in disqualification for both parties.  
+Read the following case study carefully before answering the questions. All questions are compulsory. Your answers must demonstrate understanding of the incident response lifecycle, reporting obligations, and GRC principles covered in the lecture.
+
+1. Answer all six questions. Partial credit may be awarded for incomplete but relevant answers.  
+2. Support your answers with reference to established frameworks where applicable (e.g., NIST SP 800-61, ISO 27035).  
+3. Where the question asks you to 'recommend' or 'propose', justify your answer — do not simply list actions.  
+4. Marks are allocated as shown. Manage your effort accordingly.  
+5. Plagiarism between submissions will result in disqualification for both parties.  
 
 ---
 
 **Background: MedCore Health Systems**
 
-MedCore Health Systems is a mid-sized private hospital group operating across five cities in Saudi Arabia. The organization manages electronic health records (EHR) for approximately 280,000 active patients. MedCore's IT infrastructure includes on-premise servers at each hospital location and a central data center in Riyadh that hosts the EHR system, billing platform, and HR database.  
+MedCore Health Systems is a mid-sized private hospital group operating across five cities in Saudi Arabia. The organization manages electronic health records (EHR) for approximately 280,000 active patients. MedCore's IT infrastructure includes on-premise servers at each hospital location and a central data center in Riyadh that hosts the EHR system, billing platform, and HR database.
 
 MedCore is subject to the following regulatory and standards obligations:
 
-- Saudi Arabia National Cybersecurity Authority (NCA) Essential Cybersecurity Controls (ECC-1:2018)  
-- Saudi Health Informatics Center (SHIC) health data protection guidelines  
-- Internal ISO 27001-aligned Information Security Management System (ISMS)  
+1. Saudi Arabia National Cybersecurity Authority (NCA) Essential Cybersecurity Controls (ECC-1:2018)  
+2. Saudi Health Informatics Center (SHIC) health data protection guidelines  
+3. Internal ISO 27001-aligned Information Security Management System (ISMS)  
 
 ---
 
 **The Incident**
 
 **Monday, 07:45 AM — Initial Detection**  
-The head nurse at MedCore's Jeddah branch reports that the patient scheduling system is displaying an error and appointment records appear blank. The issue is logged as a routine software glitch.  
+The head nurse at MedCore's Jeddah branch calls the IT helpdesk to report that the hospital's patient scheduling system is displaying an error and all appointment records for the day appear blank. The helpdesk technician, Fahad, logs the call as a routine software glitch and escalates it to the application support team.
 
 **Monday, 09:15 AM — Escalation**  
-Multiple branches report similar issues. Investigation reveals:  
-- Unauthorized admin account (`sysbackup_admin`) created  
-- SQL activity across databases  
-- Backup files are empty (0 bytes)  
-- 47 GB of outbound data transfer  
+Fahad receives three more calls — from the Riyadh branch, the Dammam branch, and the central billing department. All report similar symptoms: systems are accessible but data is missing or corrupted. Fahad escalates to the IT Security Manager, Nora Al-Rashidi.
 
-**Monday, 10:00 AM — Ransom Note**  
-Systems are encrypted and ransom is demanded (12 Bitcoin).  
+Nora logs into the central data center monitoring dashboard and immediately notices the following:
+
+1. An unfamiliar administrator account – ‘sysbackup_admin' – was created at 02:14 AM on Sunday night  
+2. The account ran a series of SQL commands across the EHR and billing databases between 02:30 AM and 05:45 AM  
+3. The central backup server shows all backup jobs as 'completed successfully,' but when Nora checks the backup files, they are empty — 0 bytes  
+4. Outbound data transfers of approximately 47 GB were logged to an external IP address between 03:00 AM and 04:30 AM  
+
+**Monday, 10:00 AM — Discovery of Ransom Note**  
+A member of the Riyadh IT team finds a text file named 'READ_ME_IMMEDIATELY.txt' on the file server desktop. The file reads:
+
+**Ransom Note**  
+Your systems have been compromised. All patient records, billing data, and HR files have been exfiltrated and encrypted. You have 72 hours to pay 12 Bitcoin to the wallet address below or this data will be published publicly. Do not contact law enforcement. Do not attempt recovery — your backups have been wiped. We will know.
 
 **Monday, 10:30 AM — Scope Assessment**  
-- All five hospitals affected  
-- Systems encrypted  
-- Attack traced to phishing email  
-- Manual operations activated  
+Nora and her team conduct a rapid preliminary assessment. Their findings are as follows:
+
+1. All five hospital locations are affected — the attack originated from the central Riyadh data center and propagated across the WAN  
+2. The EHR system, billing platform, and HR database are all encrypted and inaccessible  
+3. The 'sysbackup_admin' account was traced to a phishing email opened by an IT staff member on Thursday evening — the email contained a malicious macro-enabled Excel attachment  
+4. There is no evidence that clinical equipment (e.g., imaging systems, lab systems) was affected  
+5. Patient care is continuing manually using paper records, but the hospital cannot admit new patients through the normal digital process  
 
 ---
 
-### **Q1: Incident classification** [2 marks]
+## **Q1** [2 marks]
+
+Classify this incident. Identify the incident type(s), assign a severity level, and justify your classification using the CIA triad.
 
 **Answer:**
 
 **Incident Type(s):**
 
-This is a multi-category incident involving:  
+This is a multi-category incident involving:
+
 1. Ransomware / Malware incident – systems encrypted, ransom note left.  
 2. Data breach (exfiltration) – 47 GB of patient, billing, and HR data transferred.  
 3. Unauthorized access / compromised account – malicious admin account created.  
 
-**Severity Level:** Critical (NIST) or Crisis  
+**Severity Level:** Critical  
 
 **Justification using CIA Triad:**
 
-- Confidentiality – Sensitive patient data exfiltrated  
+- Confidentiality – Sensitive health data was exfiltrated  
 - Integrity – Databases corrupted and backups wiped  
 - Availability – Systems inaccessible across all hospitals  
 
 **Why severe:**
 
-- Affects all locations  
+- All five hospitals affected  
 - Backups destroyed  
 - Patient care disrupted  
-- Regulatory notification triggered  
+- Regulatory notification required  
 
 ---
 
-### **Q2: NIST Incident Response Lifecycle mapping** [2.5 marks]
+## **Q2** [2.5 marks]
+
+Map this incident to the NIST SP 800-61 Incident Response Lifecycle.
 
 **Answer:**
 
 1. **Preparation**  
-Lacked IR plan, training, monitoring. Should implement EDR, phishing training, defined IR roles.  
+Lacked incident response plan, phishing training, monitoring.  
 
 2. **Detection & Analysis**  
-Misclassified incident. Should correlate reports and escalate faster.  
+Incident misclassified initially. Should correlate reports faster.  
 
 3. **Containment**  
-Isolate data center, block external IP, disable compromised accounts.  
+Isolate systems, block IP, disable compromised accounts.  
 
 4. **Eradication**  
 Remove malware, reset credentials, rebuild systems.  
 
 5. **Recovery**  
-Restore from verified backups or reconstruct data. Test systems before reconnecting.  
+Restore from clean backups, test systems.  
 
 6. **Post-Incident Activity**  
-Produce report, update risk register, improve controls.  
+Report incident, update controls, improve monitoring.  
 
 ---
 
-### **Q3: Notification obligations** [1.5 marks]
+## **Q3** [1.5 marks]
+
+Identify notification obligations.
 
 **Answer:**
 
-**Internal notifications (immediate):**
-- CEO & CISO  
+**Internal:**
+- CEO, CISO  
 - Legal  
 - PR  
 - Hospital directors  
 - HR  
-- Patients  
 
-**External notifications:**
+**External:**
 
 | Party | Timeframe | Basis |
 |------|----------|------|
-| NCA | Immediate (≤2 hours) | ECC-1 |
-| SDAIA | ≤72 hours | PDPL |
-| SHIC | ≤24 hours | Health guidelines |
-| Law enforcement | Immediate | Criminal act |
-| Patients | ≤72 hours | PDPL |
+| NCA | Immediate | ECC-1 |
+| SDAIA | 72 hours | PDPL |
+| SHIC | 24 hours | Guidelines |
+| Law enforcement | Immediate | Criminal |
+| Patients | ~72 hours | PDPL |
 
-**NCA notification must include:**
-- Organization name  
-- Time of discovery  
-- Incident description  
+**NCA notification includes:**
+- Organization  
+- Time  
+- Description  
 - Systems affected  
-- Number of individuals  
-- Indicators of compromise  
+- Individuals impacted  
+- IoCs  
 - Actions taken  
 - Contact person  
 
 ---
 
-### **Q4: Ransom decision briefing** [1.5 marks]
+## **Q4** [1.5 marks]
+
+Ransom payment decision.
 
 **Answer:**
-
-To: CEO, MedCore Health Systems  
-Subject: Ransom Payment Recommendation  
-
-**Risks of paying:**
-- Legal issues  
-- No guarantee of recovery  
-- Encourages future attacks  
-
-**Risks of not paying:**
-- Operational disruption  
-- Data exposure  
-- Regulatory penalties  
 
 **Recommendation: DO NOT PAY**
 
-Focus on recovery, law enforcement engagement, and compliance.  
+**Reasons:**
+- No guarantee of recovery  
+- Encourages attacks  
+- Legal concerns  
+
+**Alternative:**
+- Restore systems  
+- Notify authorities  
+- Continue operations manually  
 
 ---
 
-### **Q5: Post-incident report & improvements** [1.5 marks]
+## **Q5** [1.5 marks]
+
+Post-incident report.
 
 **Answer:**
 
-**(a) Report sections:**
-- Executive Summary  
+**Sections:**
+- Executive summary  
 - Timeline  
-- Root Cause  
+- Root cause  
 - Impact  
-- Response Effectiveness  
+- Response review  
 - Notifications  
 - Improvements  
-- Lessons Learned  
-- Action Plan  
+- Lessons learned  
+- Action plan  
 
-**(b) Control improvements:**
+**Control improvements:**
 
 | Failure | Improvement |
 |--------|------------|
-| Phishing attack | MFA + training |
-| Unauthorized account | Monitoring alerts |
-| Backup failure | Immutable backups |
+| Phishing | Training + MFA |
+| Unauthorized account | Monitoring |
+| Backup failure | Offline backups |
 | Lateral spread | Network segmentation |
-| Misclassification | Incident escalation rules |
+| Misclassification | IR procedures |
 
-**(c) Risk register update:**
+**Risk update:**
 
 | Before | After |
 |-------|------|
@@ -202,7 +218,9 @@ Focus on recovery, law enforcement engagement, and compliance.
 
 ---
 
-### **Q6: GRC failures** [1 mark]
+## **Q6** [1 mark]
+
+GRC failures.
 
 **Answer:**
 
@@ -217,14 +235,14 @@ Focus on recovery, law enforcement engagement, and compliance.
 
 | Failure | Solution |
 |--------|---------|
-| Backup failure | Restore testing |
-| No ransomware planning | Threat modeling |
+| Backup failure | Testing |
+| No planning | Threat modeling |
 
 **Compliance:**
 
 | Failure | Solution |
 |--------|---------|
-| Delayed reporting | Compliance tracking |
+| Delayed reporting | Monitoring |
 | No segmentation | Access controls |
 
 ---
