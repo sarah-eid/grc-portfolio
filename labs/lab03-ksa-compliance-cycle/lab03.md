@@ -48,17 +48,25 @@ Before you start: keep CISO Assistant running from Lab02 and open it in your bro
 
 **Task 2: create a domain for the lab case**
 
+![Task 2 - Domain Creation](./screenshots/task2.png)
+
 ---
 
 **Task 3: create the perimeter for the scenario**
+
+![Task 3 - Perimeter Creation](./screenshots/task3.png)
 
 ---
 
 **Task 5: import one framework from the library**
 
+![Task 5 - Framework Import](./screenshots/task5.png)
+
 ---
 
 **Task 6: create the compliance assessment**
+
+![Task 6 - Compliance Assessment Creation](./screenshots/task6.png)
 
 ---
 
@@ -67,6 +75,8 @@ Before you start: keep CISO Assistant running from Lab02 and open it in your bro
 ---
 
 **Task 8: add evidence notes to justify your decisions**
+
+![Task 8 - Screenshot](./screenshots/task8.png)
 
 ---
 
