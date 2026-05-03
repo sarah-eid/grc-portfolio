@@ -2,7 +2,7 @@
 
 **Course:** Governance, Risk & Compliance (CS3178)  
 **Student:** Sarah Eid   
-**Institution:** Effat Univercity   
+**Institution:** Effat University  
 **Term:** Spring 2026
 
 ---
