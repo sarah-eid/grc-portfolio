@@ -13,9 +13,15 @@ Provide the following evidence from your setup:
 
 1. Screenshot: browser showing the login page (URL visible)
 
+![CISO Assistant Login Page](./screenshots/Screenshot1.png)
+
 2. Screenshot: after login (first page after login)
 
+![Dashboard after successful login](./screenshots/Screenshot2.png)
+
 3. Screenshot or copy/paste output: docker compose ps
+
+![Docker compose ps output](./screenshots/Screenshot3.png)
 
 ---
 
