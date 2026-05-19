@@ -1,0 +1,13 @@
+Regulation,Requirement,Current Status,Evidence from Scenario,Gap Description
+GDPR,Principles of data processing (Art. 5),Non-compliant,No formal risk register; informal decisions,Lack of accountability and documentation
+GDPR,Data protection by design (Art. 25),Non-compliant,No cloud security policy,Systems not securely designed/configured
+GDPR,Security of processing (Art. 32),Partially compliant,Weak access controls,Inadequate technical security measures
+GDPR,Breach notification (Art. 33),Non-compliant,"12,000-record breach not documented/reported",No breach reporting process
+GDPR,Notify data subjects (Art. 34),Non-compliant,No evidence users were informed,No customer notification process
+GDPR,DPO / governance (Art. 37),Non-compliant,No CISO or equivalent role,No assigned data protection responsibility
+PDPL,Lawful processing of data,Partially compliant,Data processed without formal policies,Lack of documented legal basis
+PDPL,Data security measures,Partially compliant,Weak access control,Insufficient protection mechanisms
+PDPL,Breach notification,Non-compliant,Previous breach not reported,Missing reporting procedure
+PDPL,Data governance,Non-compliant,No structured framework,Poor governance practices
+PDPL,Data documentation,Non-compliant,Breach not recorded,Lack of record-keeping
+PDPL,Accountability role,Non-compliant,No security leadership,No responsible authority
