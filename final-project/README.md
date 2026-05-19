@@ -37,7 +37,7 @@ Distribution of 8 identified risks based on likelihood and impact:
 | **R1** | Cloud misconfiguration - no cloud security policy | 🔴 HIGH (20) |
 | **R6** | No incident response plan - delayed breach response | 🔴 HIGH (15) |
 
-📊 **[View Full Risk Register (CSV)](Table 3_ GDPR and PDPL Compliance Gap Analysis Showing Compliance Status, Evidence from the Scenario, and Key Gaps - Sheet1.csv)**
+📊 **[View Full Risk Register (CSV)](deliverables/risk_register.csv)**
 
 ---
 
