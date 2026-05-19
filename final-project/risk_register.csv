@@ -1,0 +1,9 @@
+Risk ID,Risk Description,Affected Asset,Threat Source,Likelihood,Impact,Risk Rating,Risk Level
+R1,Cloud ration sensitive data misconfigu may expose customer,Cloud infrastruc ture,Human error / at tackers,4,5,20,High
+R2,Weak access control may allow unautho rized system access,IT systems,Unauthorized users,4,4,16,High
+R3,Data breach exposure due to sensitive finan cial data storage,Customer database,External attackers,4,5,20,High
+R4,Absence of a CISO may weaken security governance,Security manage ment proces,Internal agement misman,3,4,12,Medium
+R5,Informal risk manage ment may leave risks unidentified,Risk management process,Organizational weakness,3,3,9,Medium
+R6,Lack of incident re sponse plan may delay breach response,Incident response process,Security incidents,3,5,15,High
+R7,GDPR/PDPL non compliance may result in legal penalties,Compliance system,Regulatory author ities,3,4,12,Medium
+R8,Undocumented past breach may lead to re peated vulnerabilitie,Customer data,External attackers,3,4,12,Medium
